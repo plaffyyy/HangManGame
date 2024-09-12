@@ -1,0 +1,12 @@
+user.name=plaffyyy
+user.emain=k.zimin@innopolis.university
+user.email=k.zimin@innopolis.university
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=git@github.com:central-university-dev/backend_academy_2024_project_1-java-plaffyyy.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+branch.master.vscode-merge-base=origin/master
