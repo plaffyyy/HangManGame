@@ -1,9 +1,13 @@
 package backend.academy.domain;
 
+import lombok.Getter;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
-
-public class Medicine {
+@Getter
+public class Medicine extends Category {
+    private Random randomGenerator = new Random();
     private HashMap<String, String> medicineTerms = new HashMap<String, String>() {{
         put("Антибиотик", "Лекарство, борющееся с бактериальными инфекциями");
         put("Вакцина", "Средство для выработки иммунитета к инфекциям");
@@ -26,6 +30,9 @@ public class Medicine {
         put("МРТ", "Метод диагностики, использующий магнитное поле");
         put("Рецепт", "Документ от врача с указанием на лекарство");
     }};
-
+    public Map.Entry<String, String> getElement() {
+        int index = randomGenerator.nextInt(medicineTerms.size()-1);
+        return medicineTerms.entrySet().stream().toList().get(index);
+    }
 
 }

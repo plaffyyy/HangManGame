@@ -1,9 +1,14 @@
 package backend.academy.domain;
 
 
+import lombok.Getter;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
-public class State {
+@Getter
+public class State extends Category {
+    private Random randomGenerator = new Random();
     private HashMap<String, String> states = new HashMap<String, String>() {{
         put("Калифорния", "Штат на западном побережье США, известный своим технологическим сектором");
         put("Техас", "Второй по величине штат США, известный нефтяной промышленностью");
@@ -22,4 +27,8 @@ public class State {
         put("Аризона", "Штат на юго-западе США, известный Гранд-К");
 
     }};
+    public Map.Entry<String, String> getElement() {
+        int index = randomGenerator.nextInt(states.size()-1);
+        return states.entrySet().stream().toList().get(index);
+    }
 }

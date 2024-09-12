@@ -1,9 +1,13 @@
 package backend.academy.domain;
 
+import lombok.Getter;
+import java.util.Map;
+import java.util.Random;
 import java.util.HashMap;
 
-
-public class Math {
+@Getter
+public class Math extends Category {
+    private Random randomGenerator = new Random();
     private HashMap<String, String> mathTerms = new HashMap<String, String>() {{
         put("Интеграл", "Математическое понятие, связанное с площадями под кривыми");
         put("Производная", "Мера изменения функции");
@@ -26,5 +30,8 @@ public class Math {
         put("Произведение", "Результат умножения чисел");
         put("Уравнение", "Математическое выражение с неизвестными, которые нужно найти");
     }};
-
+    public Map.Entry<String, String> getElement() {
+        int index = randomGenerator.nextInt(mathTerms.size()-1);
+        return mathTerms.entrySet().stream().toList().get(index);
+    }
 }

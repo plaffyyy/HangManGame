@@ -1,9 +1,13 @@
 package backend.academy.domain;
 
+import lombok.Getter;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
-public class Country {
-
+@Getter
+public class Country extends Category {
+    private Random randomGenerator = new Random();
     private HashMap<String, String> countries = new HashMap<String, String>() {{
         put("Япония", "Страна восходящего солнца");
         put("США", "Страна с 50 штатами");
@@ -26,5 +30,8 @@ public class Country {
         put("Саудовская Аравия", "Страна с крупнейшими запасами нефти");
         put("Нидерланды", "Страна с каналами и ветряными мельницами");
     }};
-
+    public Map.Entry<String, String> getElement() {
+        int index = randomGenerator.nextInt(countries.size()-1);
+        return countries.entrySet().stream().toList().get(index);
+    }
 }
