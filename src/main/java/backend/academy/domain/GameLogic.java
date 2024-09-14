@@ -1,24 +1,34 @@
 package backend.academy.domain;
 
+import lombok.Getter;
 import lombok.Setter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 @Setter
+@Getter
 public class GameLogic {
-    private final BufferedReader reader;
-    private final PrintStream out;
+    private BufferedReader reader;
+    private PrintStream out;
     private String word;
     private String hint;
     private String level;
+    private int amountMistakes;
 
     public GameLogic(InputStream in, PrintStream out) {
         this.reader = new BufferedReader(new InputStreamReader(in));
         this.out = out;
+    }
+
+    public GameLogic() {
+
     }
 
     public void start() throws IOException {
@@ -27,9 +37,17 @@ public class GameLogic {
         out.println("Математика   Медицина   Города мира   Штаты США   Страны");
         out.println("Просто нажми 'Enter' для выбора случайной категории.");
 
-        String category = reader.readLine();
-        Map.Entry<String, String> wordHint = new WordsCategory(category.toLowerCase()).getCategory().getElement();
-        this.word = wordHint.getKey();
+        String categoryString = reader.readLine();
+        Category category = new WordsCategory(categoryString).getCategory();
+        while (category == null) {
+            out.println("Неверный инпут, проверь регистр");
+            out.println("Нажми 'Enter' для выбора случайного слова или напиши категорию из следующих");
+            out.println("Математика   Медицина   Города мира   Штаты США   Страны");
+            categoryString = reader.readLine();
+            category = new WordsCategory(categoryString).getCategory();
+        }
+        Map.Entry<String, String> wordHint = category.getElement();
+        this.word = wordHint.getKey().toLowerCase();
         this.hint = wordHint.getValue();
 
         out.println("Теперь выбери уровень сложности из трех, " +
@@ -37,7 +55,61 @@ public class GameLogic {
         out.println("Легкий - 7 ошибок   Средний - 6 ошибок  Сложный - 5 ошибок");
         out.println("Просто нажми 'Enter' для выбора случайного уровня сложности.");
 
-        this.level = reader.readLine();
+        this.level = reader.readLine().toLowerCase();
 
+    }
+
+    public void defineAmountMistakes() {
+        switch (this.level) {
+            case "легкий":
+                this.amountMistakes = 7;
+                break;
+            case "средний":
+                this.amountMistakes = 6;
+                break;
+            case "сложный":
+                this.amountMistakes = 5;
+                break;
+            default:
+                this.amountMistakes = new Random().nextInt(5, 7);
+                break;
+        }
+    }
+
+    public boolean play() throws IOException {
+        int mistakesCount = 0;
+        out.println(this.word);
+        ArrayList<Integer> guessedIndexes = new ArrayList<>();
+        ArrayList<Character> mistakesElements = new ArrayList<>();
+        ArrayList<Character> usedElements =
+            new ArrayList<>(); //store the element, which was used for using it in front-end class
+        while (mistakesCount < this.amountMistakes && guessedIndexes.size() < this.word.length()) {
+            boolean flag = false;
+            String stringElement = reader.readLine();
+            while (stringElement.length() != 1) {
+                out.println("Ты ввел больше одного символа или вообще не ввел, попробуй еще раз.");
+                stringElement = reader.readLine();
+            }
+            char[] element = stringElement.toLowerCase().toCharArray();
+            for (int i = 0; i < this.word.length(); i++) {
+                if (this.word.charAt(i) == element[0]) {
+                    guessedIndexes.add(i);
+                    flag = true;
+                }
+            }
+            if (!flag) {
+                mistakesElements.add(element[0]);
+                mistakesCount++;
+            } else {
+                usedElements.add(element[0]);
+            }
+        }
+        if (mistakesCount == this.amountMistakes) {
+            out.println("Вы проиграли(");
+            return false;
+        } else {
+            out.println("Поздравляем! Все верно!");
+            return true;
+        }
     }
 }

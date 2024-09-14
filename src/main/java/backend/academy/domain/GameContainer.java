@@ -4,11 +4,12 @@ package backend.academy.domain;
 import java.io.IOException;
 
 
-public class GameVizualizator {
+public class GameContainer {
     public static void main(String[] args) throws IOException {
         GameLogic game = new GameLogic(System.in, System.out);
         game.start();
-
+        game.defineAmountMistakes();
+        game.play();
     }
 
 
