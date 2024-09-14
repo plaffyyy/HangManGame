@@ -17,7 +17,7 @@ class WordsCategory {
             int index = randomGenerator.nextInt(this.categories.size());
             this.category = this.categories.get(index);
         } else {
-            this.category = category;
+            this.category = category.toLowerCase();
         }
     }
 
