@@ -17,6 +17,11 @@ import java.util.Random;
 public class GameLogic {
     private BufferedReader reader;
     private PrintStream out;
+    private final ArrayList<Character> alphabet = new ArrayList<>(Arrays.asList(
+        'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м',
+        'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ',
+        'ы', 'ь', 'э', 'ю', 'я'
+    ));
     private String word;
     private String hint;
     private String level;
@@ -75,21 +80,45 @@ public class GameLogic {
                 break;
         }
     }
+    public void printAlphabet(ArrayList<Character> mistakesElements, ArrayList<Character> usedElements) {
+        for (Character element: alphabet) {
+            if (mistakesElements.contains(element) || usedElements.contains(element)) {
+                continue;
+            } else {
+                out.print(element + " ");
+            }
+        }
+        out.println();
+    }
 
     public boolean play() throws IOException {
         int mistakesCount = 0;
-        out.println(this.word);
+        GameVisualizator visualizator = new GameVisualizator(out, word);
+
         ArrayList<Integer> guessedIndexes = new ArrayList<>();
         ArrayList<Character> mistakesElements = new ArrayList<>();
         ArrayList<Character> usedElements =
-            new ArrayList<>(); //store the element, which was used for using it in front-end class
+            new ArrayList<>(); //store the element, which was used
+
         while (mistakesCount < this.amountMistakes && guessedIndexes.size() < this.word.length()) {
+            out.println("Введи букву из следующих:");
+
+            printAlphabet(mistakesElements, usedElements);
+
+            visualizator.print(mistakesCount);
+
             boolean flag = false;
             String stringElement = reader.readLine();
             while (stringElement.length() != 1) {
                 out.println("Ты ввел больше одного символа или вообще не ввел, попробуй еще раз.");
                 stringElement = reader.readLine();
             }
+            while (usedElements.contains(stringElement.toCharArray()[0]) ||
+                    mistakesElements.contains(stringElement.toCharArray()[0])) {
+                out.println("Ты уже вводил этот символ, введи из списка выше:");
+                stringElement = reader.readLine();
+            }
+
             char[] element = stringElement.toLowerCase().toCharArray();
             for (int i = 0; i < this.word.length(); i++) {
                 if (this.word.charAt(i) == element[0]) {
@@ -97,6 +126,7 @@ public class GameLogic {
                     flag = true;
                 }
             }
+
             if (!flag) {
                 mistakesElements.add(element[0]);
                 mistakesCount++;
@@ -104,7 +134,9 @@ public class GameLogic {
                 usedElements.add(element[0]);
             }
         }
+
         if (mistakesCount == this.amountMistakes) {
+            visualizator.print(mistakesCount);
             out.println("Вы проиграли(");
             return false;
         } else {
