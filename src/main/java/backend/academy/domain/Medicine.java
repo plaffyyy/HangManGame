@@ -1,9 +1,9 @@
 package backend.academy.domain;
 
-import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import lombok.Getter;
 
 @Getter
 public class Medicine extends Category {
@@ -29,9 +29,14 @@ public class Medicine extends Category {
         put("Трансплантация", "Пересадка органов или тканей");
         put("Рецепт", "Документ от врача с указанием на лекарство");
     }};
+
     public Map.Entry<String, String> getElement() {
-        int index = randomGenerator.nextInt(medicineTerms.size()-1);
+        int index = randomGenerator.nextInt(medicineTerms.size() - 1);
         return medicineTerms.entrySet().stream().toList().get(index);
     }
 
+    @Override
+    public String toString() {
+        return "медицина";
+    }
 }

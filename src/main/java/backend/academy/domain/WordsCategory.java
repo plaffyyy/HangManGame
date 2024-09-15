@@ -1,17 +1,25 @@
 package backend.academy.domain;
 
-import lombok.Getter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import lombok.Getter;
 
 @Getter
-class WordsCategory {
-    private List<String> categories = new ArrayList<>(Arrays.asList("города мира", "страны", "математика", "штаты", "медицина"));
+public class WordsCategory {
+    private static final int INDEX_CITY = 0;
+    private static final int INDEX_COUNTRY = 1;
+    private static final int INDEX_MATH = 2;
+    private static final int INDEX_STATE = 3;
+    private static final int INDEX_MEDICINE = 4;
+
+    private List<String> categories =
+        new ArrayList<>(Arrays.asList("города мира", "страны", "математика", "штаты", "медицина"));
     private String category;
     private Random randomGenerator;
-    public WordsCategory (String category) {
+
+    public WordsCategory(String category) {
         this.randomGenerator = new Random();
         if (category.equals("")) {
             int index = randomGenerator.nextInt(this.categories.size());
@@ -22,14 +30,15 @@ class WordsCategory {
     }
 
     public Category getCategory() {
-        switch (category) {
-            case "математика": return new Math();
-            case "города мира": return new City();
-            case "страны": return new Country();
-            case "штаты": return new State();
-            case "медицина": return new Medicine();
-            default: return null;
-        }
+        int index = categories.indexOf(category);
+        return switch (index) {
+            case INDEX_CITY -> new City();
+            case INDEX_COUNTRY -> new Country();
+            case INDEX_MATH -> new Math();
+            case INDEX_STATE -> new State();
+            case INDEX_MEDICINE -> new Medicine();
+            default -> null;
+        };
     }
 
 }

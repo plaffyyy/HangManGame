@@ -1,13 +1,12 @@
 package backend.academy.domain;
 
-
-import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import lombok.Getter;
 
 @Getter
-public class City extends Category{
+public class City extends Category {
     private Random randomGenerator = new Random();
     private HashMap<String, String> cities = new HashMap<String, String>() {{
         put("Токио", "Столица Японии");
@@ -28,8 +27,14 @@ public class City extends Category{
         put("Каир", "Столица Египта");
         put("Амстердам", "Столица Нидерландов");
     }};
+
     public Map.Entry<String, String> getElement() {
-        int index = randomGenerator.nextInt(cities.size()-1);
+        int index = randomGenerator.nextInt(cities.size() - 1);
         return cities.entrySet().stream().toList().get(index);
+    }
+
+    @Override
+    public String toString() {
+        return "города мира";
     }
 }

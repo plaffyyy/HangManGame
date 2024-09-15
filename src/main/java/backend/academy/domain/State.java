@@ -1,10 +1,9 @@
 package backend.academy.domain;
 
-
-import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import lombok.Getter;
 
 @Getter
 public class State extends Category {
@@ -25,8 +24,14 @@ public class State extends Category {
         put("Аризона", "Штат на юго-западе США, известный Гранд-К");
 
     }};
+
     public Map.Entry<String, String> getElement() {
-        int index = randomGenerator.nextInt(states.size()-1);
+        int index = randomGenerator.nextInt(states.size() - 1);
         return states.entrySet().stream().toList().get(index);
+    }
+
+    @Override
+    public String toString() {
+        return "штаты";
     }
 }

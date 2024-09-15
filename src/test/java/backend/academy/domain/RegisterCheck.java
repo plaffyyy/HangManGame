@@ -14,6 +14,4 @@ public class RegisterCheck {
         assertThat(first).isEqualTo(category.category());
     }
 
-
-
 }
