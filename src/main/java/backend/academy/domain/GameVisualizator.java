@@ -3,7 +3,7 @@ package backend.academy.domain;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-public class GameVisualizator {
+public final class GameVisualizator {
     private static final int MISTAKE_COUNT_ONE = 1;
     private static final int MISTAKE_COUNT_TWO = 2;
     private static final int MISTAKE_COUNT_THREE = 3;

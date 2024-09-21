@@ -3,7 +3,7 @@ package backend.academy.domain;
 import java.io.IOException;
 
 @SuppressWarnings("UncommentedMain")
-public class GameContainer {
+public final class GameContainer {
 
     private GameContainer() {
 

@@ -1,13 +1,13 @@
 package backend.academy.domain;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import lombok.Getter;
 
 @Getter
-public class City extends Category {
-    private Random randomGenerator = new Random();
+public non-sealed class City extends Category {
+    private SecureRandom randomGenerator = new SecureRandom();
     private HashMap<String, String> cities = new HashMap<String, String>() {{
         put("Токио", "Столица Японии");
         put("Париж", "Столица Франции, известная Эйфелевой башней");

@@ -1,13 +1,13 @@
 package backend.academy.domain;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import lombok.Getter;
 
 @Getter
-public class Country extends Category {
-    private Random randomGenerator = new Random();
+public non-sealed class Country extends Category {
+    private SecureRandom randomGenerator = new SecureRandom();
     private HashMap<String, String> countries = new HashMap<String, String>() {{
         put("Япония", "Страна восходящего солнца");
         put("США", "Страна с 50 штатами");

@@ -1,13 +1,13 @@
 package backend.academy.domain;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import lombok.Getter;
 
 @Getter
-public class Math extends Category {
-    private Random randomGenerator = new Random();
+public non-sealed class Math extends Category {
+    private SecureRandom randomGenerator = new SecureRandom();
     private HashMap<String, String> mathTerms = new HashMap<String, String>() {{
         put("Интеграл", "Математическое понятие, связанное с площадями под кривыми");
         put("Производная", "Мера изменения функции");

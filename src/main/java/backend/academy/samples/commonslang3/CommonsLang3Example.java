@@ -57,11 +57,11 @@ public class CommonsLang3Example {
             log.info("Validation of number result: '{}'", e.getMessage());
         }
 
-        var randomString = (String) MethodUtils.invokeStaticMethod(CommonsLang3Example.class, "getRandomString");
-        log.info("Random string obtained using reflection: '{}'", randomString);
+        var SecureRandomString = (String) MethodUtils.invokeStaticMethod(CommonsLang3Example.class, "getSecureRandomString");
+        log.info("SecureRandom string obtained using reflection: '{}'", SecureRandomString);
     }
 
-    public static String getRandomString() {
+    public static String getSecureRandomString() {
         return RandomStringUtils.randomAlphanumeric(6);
     }
 }

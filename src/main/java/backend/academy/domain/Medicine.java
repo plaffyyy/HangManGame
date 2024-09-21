@@ -1,13 +1,13 @@
 package backend.academy.domain;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import lombok.Getter;
 
 @Getter
-public class Medicine extends Category {
-    private Random randomGenerator = new Random();
+public non-sealed class Medicine extends Category {
+    private SecureRandom randomGenerator = new SecureRandom();
     private HashMap<String, String> medicineTerms = new HashMap<String, String>() {{
         put("Антибиотик", "Лекарство, борющееся с бактериальными инфекциями");
         put("Вакцина", "Средство для выработки иммунитета к инфекциям");

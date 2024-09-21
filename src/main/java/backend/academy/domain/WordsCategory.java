@@ -1,13 +1,13 @@
 package backend.academy.domain;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 import lombok.Getter;
 
 @Getter
-public class WordsCategory {
+public final class WordsCategory {
     private static final int INDEX_CITY = 0;
     private static final int INDEX_COUNTRY = 1;
     private static final int INDEX_MATH = 2;
@@ -17,10 +17,10 @@ public class WordsCategory {
     private List<String> categories =
         new ArrayList<>(Arrays.asList("города мира", "страны", "математика", "штаты", "медицина"));
     private String category;
-    private Random randomGenerator;
+    private SecureRandom randomGenerator;
 
     public WordsCategory(String category) {
-        this.randomGenerator = new Random();
+        this.randomGenerator = new SecureRandom();
         if (category.equals("")) {
             int index = randomGenerator.nextInt(this.categories.size());
             this.category = this.categories.get(index);

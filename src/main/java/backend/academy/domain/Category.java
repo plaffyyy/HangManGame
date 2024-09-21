@@ -2,6 +2,6 @@ package backend.academy.domain;
 
 import java.util.Map;
 
-abstract class Category {
+public abstract sealed class Category permits City, Country, Math, Medicine, State {
     public abstract Map.Entry<String, String> getElement();
 }

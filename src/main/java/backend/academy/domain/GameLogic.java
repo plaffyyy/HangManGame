@@ -5,18 +5,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Random;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter @Getter public class GameLogic {
+@Setter @Getter public final class GameLogic {
     private static final int EASY_MISTAKES_LIMIT = 7;
     private static final int MEDIUM_MISTAKES_LIMIT = 6;
     private static final int HARD_MISTAKES_LIMIT = 5;
     private static final String HINT_COMMAND = "подсказка";
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     private BufferedReader reader;
     private PrintStream out;
@@ -31,7 +33,7 @@ import lombok.Setter;
     private int amountMistakes;
 
     public GameLogic(InputStream in, PrintStream out) {
-        this.reader = new BufferedReader(new InputStreamReader(in));
+        this.reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));
         this.out = out;
     }
 
@@ -44,7 +46,6 @@ import lombok.Setter;
             + "укажи категорию слов, которая нравится больше всего из следующих:");
         out.println("Математика   Медицина   Города мира   Штаты   Страны");
         out.println("Просто нажми 'Enter' для выбора случайной категории.");
-
         String categoryString = reader.readLine();
         Category selectedCategory = new WordsCategory(categoryString).getCategory();
         while (selectedCategory == null) {
@@ -83,7 +84,7 @@ import lombok.Setter;
                 this.amountMistakes = HARD_MISTAKES_LIMIT;
                 break;
             default:
-                this.amountMistakes = new Random().nextInt(HARD_MISTAKES_LIMIT, EASY_MISTAKES_LIMIT);
+                this.amountMistakes = RANDOM.nextInt(HARD_MISTAKES_LIMIT, EASY_MISTAKES_LIMIT);
                 break;
         }
     }
@@ -121,11 +122,11 @@ import lombok.Setter;
 
             boolean flag = false;
             String stringElement = reader.readLine().toLowerCase();
-            if (stringElement.equals(HINT_COMMAND) && hintsCount < hintsLimit) {
+            if (hintsCount < hintsLimit && HINT_COMMAND.equals(stringElement)) {
                 out.println(this.hint);
                 hintsCount++;
                 continue;
-            } else if (stringElement.equals(HINT_COMMAND) && hintsCount >= hintsLimit) {
+            } else if (hintsCount >= hintsLimit && HINT_COMMAND.equals(stringElement)) {
                 out.println("Ты уже пользовался возможностью взять подсказку!");
                 continue;
             }
