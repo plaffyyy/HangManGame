@@ -19,6 +19,7 @@ public final class GameVisualizator {
     private static final String HEAD = "  |     O";
     private static final String BODY = "  |    /|\\";
     private static final String LEGS = "  |    / \\";
+    private static final Character EMPTY_ELEMENT = '_';
 
 
     private PrintStream out;
@@ -132,7 +133,7 @@ public final class GameVisualizator {
             if (indexes.contains(i)) {
                 out.print(this.word.charAt(i));
             } else {
-                out.print("_");
+                out.print(EMPTY_ELEMENT);
             }
         }
         out.println();

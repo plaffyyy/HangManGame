@@ -130,7 +130,7 @@ import lombok.Setter;
                 out.println("Ты уже пользовался возможностью взять подсказку!");
                 continue;
             }
-            while (!alphabet.contains(stringElement.toCharArray()[0])) {
+            while (!alphabet.contains(stringElement.charAt(0))) {
                 out.println("Введи символ на латинице!");
                 stringElement = reader.readLine().toLowerCase();
             }
@@ -138,26 +138,26 @@ import lombok.Setter;
                 out.println("Ты ввел больше одного символа или вообще не ввел, попробуй еще раз.");
                 stringElement = reader.readLine().toLowerCase();
             }
-            while (usedElements.contains(stringElement.toCharArray()[0])
-                || mistakesElements.contains(stringElement.toCharArray()[0])) {
+            while (usedElements.contains(stringElement.charAt(0))
+                || mistakesElements.contains(stringElement.charAt(0))) {
                 out.println("Ты уже вводил этот символ, введи из списка ниже:");
                 printAlphabet(mistakesElements, usedElements);
                 stringElement = reader.readLine().toLowerCase();
             }
 
-            char[] element = stringElement.toLowerCase().toCharArray();
+            char element = stringElement.toLowerCase().charAt(0);
             for (int i = 0; i < this.word.length(); i++) {
-                if (this.word.charAt(i) == element[0]) {
+                if (this.word.charAt(i) == element) {
                     guessedIndexes.add(i);
                     flag = true;
                 }
             }
 
             if (!flag) {
-                mistakesElements.add(element[0]);
+                mistakesElements.add(element);
                 mistakesCount++;
             } else {
-                usedElements.add(element[0]);
+                usedElements.add(element);
             }
         }
 

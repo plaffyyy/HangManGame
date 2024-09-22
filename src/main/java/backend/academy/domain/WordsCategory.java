@@ -21,7 +21,7 @@ public final class WordsCategory {
 
     public WordsCategory(String category) {
         this.randomGenerator = new SecureRandom();
-        if (category.equals("")) {
+        if (category.isEmpty()) {
             int index = randomGenerator.nextInt(this.categories.size());
             this.category = this.categories.get(index);
         } else {
