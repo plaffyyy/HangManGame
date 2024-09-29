@@ -1,14 +1,12 @@
 package backend.academy.domain;
 
-import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
 
 @Getter
 public non-sealed class City extends Category {
-    private SecureRandom randomGenerator = new SecureRandom();
-    private HashMap<String, String> cities = new HashMap<String, String>() {{
+    private Map<String, String> cities = new HashMap<String, String>() {{
         put("Токио", "Столица Японии");
         put("Париж", "Столица Франции, известная Эйфелевой башней");
         put("Лондон", "Столица Великобритании");
@@ -28,9 +26,9 @@ public non-sealed class City extends Category {
         put("Амстердам", "Столица Нидерландов");
     }};
 
-    public Map.Entry<String, String> getElement() {
-        int index = randomGenerator.nextInt(cities.size() - 1);
-        return cities.entrySet().stream().toList().get(index);
+    @Override
+    public Map<String, String> getData() {
+        return cities;
     }
 
     @Override

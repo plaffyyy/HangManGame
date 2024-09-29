@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public non-sealed class Country extends Category {
     private SecureRandom randomGenerator = new SecureRandom();
-    private HashMap<String, String> countries = new HashMap<String, String>() {{
+    private Map<String, String> countries = new HashMap<String, String>() {{
         put("Япония", "Страна восходящего солнца");
         put("США", "Страна с 50 штатами");
         put("Франция", "Страна с Эйфелевой башней");
@@ -26,14 +26,14 @@ public non-sealed class Country extends Category {
         put("Аргентина", "Страна, известная своим танго и футболом");
         put("Египет", "Страна с древними пирамидами");
         put("Мексика", "Страна, известная своей кухней и праздниками");
-        put("Южная Корея", "Страна, известная своими технологиями и поп-культурой");
-        put("Саудовская Аравия", "Страна с крупнейшими запасами нефти");
+        put("ЮжнаяКорея", "Страна, известная своими технологиями и поп-культурой");
+        put("СаудовскаяАравия", "Страна с крупнейшими запасами нефти");
         put("Нидерланды", "Страна с каналами и ветряными мельницами");
     }};
 
-    public Map.Entry<String, String> getElement() {
-        int index = randomGenerator.nextInt(countries.size() - 1);
-        return countries.entrySet().stream().toList().get(index);
+    @Override
+    public Map<String, String> getData() {
+        return countries;
     }
 
     @Override

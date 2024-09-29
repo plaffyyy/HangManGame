@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public non-sealed class Math extends Category {
     private SecureRandom randomGenerator = new SecureRandom();
-    private HashMap<String, String> mathTerms = new HashMap<String, String>() {{
+    private Map<String, String> mathTerms = new HashMap<String, String>() {{
         put("Интеграл", "Математическое понятие, связанное с площадями под кривыми");
         put("Производная", "Мера изменения функции");
         put("Матрица", "Прямоугольная таблица чисел");
@@ -31,9 +31,9 @@ public non-sealed class Math extends Category {
         put("Уравнение", "Математическое выражение с неизвестными, которые нужно найти");
     }};
 
-    public Map.Entry<String, String> getElement() {
-        int index = randomGenerator.nextInt(mathTerms.size() - 1);
-        return mathTerms.entrySet().stream().toList().get(index);
+    @Override
+    public Map<String, String> getData() {
+        return mathTerms;
     }
 
     @Override

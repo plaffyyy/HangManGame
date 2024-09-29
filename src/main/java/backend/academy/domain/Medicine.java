@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public non-sealed class Medicine extends Category {
     private SecureRandom randomGenerator = new SecureRandom();
-    private HashMap<String, String> medicineTerms = new HashMap<String, String>() {{
+    private Map<String, String> medicineTerms = new HashMap<String, String>() {{
         put("Антибиотик", "Лекарство, борющееся с бактериальными инфекциями");
         put("Вакцина", "Средство для выработки иммунитета к инфекциям");
         put("Диагноз", "Определение заболевания на основе симптомов");
@@ -30,9 +30,9 @@ public non-sealed class Medicine extends Category {
         put("Рецепт", "Документ от врача с указанием на лекарство");
     }};
 
-    public Map.Entry<String, String> getElement() {
-        int index = randomGenerator.nextInt(medicineTerms.size() - 1);
-        return medicineTerms.entrySet().stream().toList().get(index);
+    @Override
+    public Map<String, String> getData() {
+        return medicineTerms;
     }
 
     @Override

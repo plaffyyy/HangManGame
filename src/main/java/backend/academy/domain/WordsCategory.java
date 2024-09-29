@@ -14,10 +14,10 @@ public final class WordsCategory {
     private static final int INDEX_STATE = 3;
     private static final int INDEX_MEDICINE = 4;
 
-    private List<String> categories =
+    private final List<String> categories =
         new ArrayList<>(Arrays.asList("города мира", "страны", "математика", "штаты", "медицина"));
-    private String category;
-    private SecureRandom randomGenerator;
+    private final String category;
+    private final SecureRandom randomGenerator;
 
     public WordsCategory(String category) {
         this.randomGenerator = new SecureRandom();
