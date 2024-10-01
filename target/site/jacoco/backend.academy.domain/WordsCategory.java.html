@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WordsCategory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java</a> &gt; <a href="index.source.html" class="el_package">backend.academy.domain</a> &gt; <span class="el_source">WordsCategory.java</span></div><h1>WordsCategory.java</h1><pre class="source lang-java linenums">package backend.academy.domain;
+
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import lombok.Getter;
+
+@Getter
+public final class WordsCategory {
+    private static final int INDEX_CITY = 0;
+    private static final int INDEX_COUNTRY = 1;
+    private static final int INDEX_MATH = 2;
+    private static final int INDEX_STATE = 3;
+    private static final int INDEX_MEDICINE = 4;
+
+<span class="nc" id="L17">    private final List&lt;String&gt; categories =</span>
+<span class="nc" id="L18">        new ArrayList&lt;&gt;(Arrays.asList(&quot;города мира&quot;, &quot;страны&quot;, &quot;математика&quot;, &quot;штаты&quot;, &quot;медицина&quot;));</span>
+    private final String category;
+    private final SecureRandom randomGenerator;
+
+<span class="nc" id="L22">    public WordsCategory(String category) {</span>
+<span class="nc" id="L23">        this.randomGenerator = new SecureRandom();</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        if (category.isEmpty()) {</span>
+<span class="nc" id="L25">            int index = randomGenerator.nextInt(this.categories.size());</span>
+<span class="nc" id="L26">            this.category = this.categories.get(index);</span>
+<span class="nc" id="L27">        } else {</span>
+<span class="nc" id="L28">            this.category = category.toLowerCase();</span>
+        }
+<span class="nc" id="L30">    }</span>
+
+    public Category getCategory() {
+<span class="nc" id="L33">        int index = categories.indexOf(category);</span>
+<span class="nc bnc" id="L34" title="All 6 branches missed.">        return switch (index) {</span>
+<span class="nc" id="L35">            case INDEX_CITY -&gt; new City();</span>
+<span class="nc" id="L36">            case INDEX_COUNTRY -&gt; new Country();</span>
+<span class="nc" id="L37">            case INDEX_MATH -&gt; new Math();</span>
+<span class="nc" id="L38">            case INDEX_STATE -&gt; new State();</span>
+<span class="nc" id="L39">            case INDEX_MEDICINE -&gt; new Medicine();</span>
+<span class="nc" id="L40">            default -&gt; null;</span>
+        };
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Medicine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java</a> &gt; <a href="index.source.html" class="el_package">backend.academy.domain</a> &gt; <span class="el_source">Medicine.java</span></div><h1>Medicine.java</h1><pre class="source lang-java linenums">package backend.academy.domain;
+
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
+import lombok.Getter;
+
+@Getter
+<span class="nc" id="L9">public non-sealed class Medicine extends Category {</span>
+<span class="nc" id="L10">    private SecureRandom randomGenerator = new SecureRandom();</span>
+<span class="nc" id="L11">    private Map&lt;String, String&gt; medicineTerms = new HashMap&lt;String, String&gt;() {{</span>
+<span class="nc" id="L12">        put(&quot;Антибиотик&quot;, &quot;Лекарство, борющееся с бактериальными инфекциями&quot;);</span>
+<span class="nc" id="L13">        put(&quot;Вакцина&quot;, &quot;Средство для выработки иммунитета к инфекциям&quot;);</span>
+<span class="nc" id="L14">        put(&quot;Диагноз&quot;, &quot;Определение заболевания на основе симптомов&quot;);</span>
+<span class="nc" id="L15">        put(&quot;Хирургия&quot;, &quot;Медицинская процедура, включающая операцию&quot;);</span>
+<span class="nc" id="L16">        put(&quot;Терапия&quot;, &quot;Лечение заболевания без хирургического вмешательства&quot;);</span>
+<span class="nc" id="L17">        put(&quot;Иммунитет&quot;, &quot;Способность организма защищаться от болезней&quot;);</span>
+<span class="nc" id="L18">        put(&quot;Пандемия&quot;, &quot;Массовое распространение заболевания по всему миру&quot;);</span>
+<span class="nc" id="L19">        put(&quot;Прививка&quot;, &quot;Введение вакцины для профилактики заболевания&quot;);</span>
+<span class="nc" id="L20">        put(&quot;Симптом&quot;, &quot;Признак или проявление заболевания&quot;);</span>
+<span class="nc" id="L21">        put(&quot;Лечение&quot;, &quot;Процесс выздоровления и устранения болезни&quot;);</span>
+<span class="nc" id="L22">        put(&quot;Инъекция&quot;, &quot;Введение лекарства в организм через шприц&quot;);</span>
+<span class="nc" id="L23">        put(&quot;Вирус&quot;, &quot;Микроорганизм, вызывающий инфекционные заболевания&quot;);</span>
+<span class="nc" id="L24">        put(&quot;Бактерия&quot;, &quot;Одноклеточный организм, который может вызывать инфекции&quot;);</span>
+<span class="nc" id="L25">        put(&quot;Рак&quot;, &quot;Злокачественное новообразование&quot;);</span>
+<span class="nc" id="L26">        put(&quot;Диабет&quot;, &quot;Хроническое заболевание, связанное с нарушением обмена сахара&quot;);</span>
+<span class="nc" id="L27">        put(&quot;Пульс&quot;, &quot;Ритмичное колебание артериальных стенок&quot;);</span>
+<span class="nc" id="L28">        put(&quot;Давление&quot;, &quot;Сила, с которой кровь давит на стенки сосудов&quot;);</span>
+<span class="nc" id="L29">        put(&quot;Трансплантация&quot;, &quot;Пересадка органов или тканей&quot;);</span>
+<span class="nc" id="L30">        put(&quot;Рецепт&quot;, &quot;Документ от врача с указанием на лекарство&quot;);</span>
+    }};
+
+    @Override
+    public Map&lt;String, String&gt; getData() {
+<span class="nc" id="L35">        return medicineTerms;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L40">        return &quot;медицина&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Country.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java</a> &gt; <a href="index.source.html" class="el_package">backend.academy.domain</a> &gt; <span class="el_source">Country.java</span></div><h1>Country.java</h1><pre class="source lang-java linenums">package backend.academy.domain;
+
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
+import lombok.Getter;
+
+@Getter
+<span class="nc" id="L9">public non-sealed class Country extends Category {</span>
+<span class="nc" id="L10">    private SecureRandom randomGenerator = new SecureRandom();</span>
+<span class="nc" id="L11">    private Map&lt;String, String&gt; countries = new HashMap&lt;String, String&gt;() {{</span>
+<span class="nc" id="L12">        put(&quot;Япония&quot;, &quot;Страна восходящего солнца&quot;);</span>
+<span class="nc" id="L13">        put(&quot;США&quot;, &quot;Страна с 50 штатами&quot;);</span>
+<span class="nc" id="L14">        put(&quot;Франция&quot;, &quot;Страна с Эйфелевой башней&quot;);</span>
+<span class="nc" id="L15">        put(&quot;Великобритания&quot;, &quot;Страна с монархией и Биг-Беном&quot;);</span>
+<span class="nc" id="L16">        put(&quot;Китай&quot;, &quot;Самая населённая страна мира&quot;);</span>
+<span class="nc" id="L17">        put(&quot;Россия&quot;, &quot;Самая большая страна мира по территории&quot;);</span>
+<span class="nc" id="L18">        put(&quot;Индия&quot;, &quot;Вторая по численности населения страна&quot;);</span>
+<span class="nc" id="L19">        put(&quot;Австралия&quot;, &quot;Страна и континент&quot;);</span>
+<span class="nc" id="L20">        put(&quot;Италия&quot;, &quot;Страна, известная своей культурой и кухней&quot;);</span>
+<span class="nc" id="L21">        put(&quot;Германия&quot;, &quot;Страна с богатой историей и промышленностью&quot;);</span>
+<span class="nc" id="L22">        put(&quot;Канада&quot;, &quot;Вторая по размеру страна в мире&quot;);</span>
+<span class="nc" id="L23">        put(&quot;ОАЭ&quot;, &quot;Страна с одним из самых высоких уровней жизни&quot;);</span>
+<span class="nc" id="L24">        put(&quot;Испания&quot;, &quot;Страна с богатой культурой и фламенко&quot;);</span>
+<span class="nc" id="L25">        put(&quot;Бразилия&quot;, &quot;Крупнейшая страна Южной Америки&quot;);</span>
+<span class="nc" id="L26">        put(&quot;Аргентина&quot;, &quot;Страна, известная своим танго и футболом&quot;);</span>
+<span class="nc" id="L27">        put(&quot;Египет&quot;, &quot;Страна с древними пирамидами&quot;);</span>
+<span class="nc" id="L28">        put(&quot;Мексика&quot;, &quot;Страна, известная своей кухней и праздниками&quot;);</span>
+<span class="nc" id="L29">        put(&quot;ЮжнаяКорея&quot;, &quot;Страна, известная своими технологиями и поп-культурой&quot;);</span>
+<span class="nc" id="L30">        put(&quot;СаудовскаяАравия&quot;, &quot;Страна с крупнейшими запасами нефти&quot;);</span>
+<span class="nc" id="L31">        put(&quot;Нидерланды&quot;, &quot;Страна с каналами и ветряными мельницами&quot;);</span>
+    }};
+
+    @Override
+    public Map&lt;String, String&gt; getData() {
+<span class="nc" id="L36">        return countries;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L41">        return &quot;страны&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameVisualizator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java</a> &gt; <a href="index.source.html" class="el_package">backend.academy.domain</a> &gt; <span class="el_source">GameVisualizator.java</span></div><h1>GameVisualizator.java</h1><pre class="source lang-java linenums">package backend.academy.domain;
+
+import java.io.PrintStream;
+import java.util.List;
+
+public final class GameVisualizator {
+    private static final int MISTAKE_COUNT_ONE = 1;
+    private static final int MISTAKE_COUNT_TWO = 2;
+    private static final int MISTAKE_COUNT_THREE = 3;
+    private static final int MISTAKE_COUNT_FOUR = 4;
+    private static final int MISTAKE_COUNT_FIVE = 5;
+    private static final int MISTAKE_COUNT_SIX = 6;
+    private static final int MISTAKE_COUNT_SEVEN = 7;
+
+    private static final String TOP_BORDER = &quot;  _______&quot;;
+    private static final String SIDE_BORDER = &quot;  |     |&quot;;
+    private static final String EMPTY_SIDE = &quot;  |    &quot;;
+    private static final String BASE = &quot;__|__&quot;;
+    private static final String HEAD = &quot;  |     O&quot;;
+    private static final String BODY = &quot;  |    /|\\&quot;;
+    private static final String LEGS = &quot;  |    / \\&quot;;
+<span class="nc" id="L22">    private static final Character EMPTY_ELEMENT = '_';</span>
+
+
+    private PrintStream out;
+    private String word;
+
+<span class="nc" id="L28">    public GameVisualizator(PrintStream out, String word) {</span>
+<span class="nc" id="L29">        this.out = out;</span>
+<span class="nc" id="L30">        this.word = word;</span>
+<span class="nc" id="L31">    }</span>
+
+    public void printOne() {
+<span class="nc" id="L34">        out.println(TOP_BORDER);</span>
+<span class="nc" id="L35">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L36">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L37">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L38">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L39">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L40">        out.println(BASE);</span>
+<span class="nc" id="L41">    }</span>
+
+    public void printTwo() {
+<span class="nc" id="L44">        out.println(TOP_BORDER);</span>
+<span class="nc" id="L45">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L46">        out.println(HEAD);</span>
+<span class="nc" id="L47">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L48">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L49">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L50">        out.println(BASE);</span>
+<span class="nc" id="L51">    }</span>
+
+    public void printThree() {
+<span class="nc" id="L54">        out.println(TOP_BORDER);</span>
+<span class="nc" id="L55">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L56">        out.println(HEAD);</span>
+<span class="nc" id="L57">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L58">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L59">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L60">        out.println(BASE);</span>
+<span class="nc" id="L61">    }</span>
+
+    public void printFour() {
+<span class="nc" id="L64">        out.println(TOP_BORDER);</span>
+<span class="nc" id="L65">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L66">        out.println(HEAD);</span>
+<span class="nc" id="L67">        out.println(BODY);</span>
+<span class="nc" id="L68">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L69">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L70">        out.println(BASE);</span>
+<span class="nc" id="L71">    }</span>
+
+    public void printFive() {
+<span class="nc" id="L74">        out.println(TOP_BORDER);</span>
+<span class="nc" id="L75">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L76">        out.println(HEAD);</span>
+<span class="nc" id="L77">        out.println(BODY);</span>
+<span class="nc" id="L78">        out.println(LEGS);</span>
+<span class="nc" id="L79">        out.println(EMPTY_SIDE);</span>
+<span class="nc" id="L80">        out.println(BASE);</span>
+<span class="nc" id="L81">    }</span>
+
+    public void printSix() {
+<span class="nc" id="L84">        out.println(TOP_BORDER);</span>
+<span class="nc" id="L85">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L86">        out.println(HEAD);</span>
+<span class="nc" id="L87">        out.println(BODY);</span>
+<span class="nc" id="L88">        out.println(LEGS);</span>
+<span class="nc" id="L89">        out.println(EMPTY_SIDE + &quot; ``&quot;);</span>
+<span class="nc" id="L90">        out.println(BASE + &quot;    ``&quot;);</span>
+<span class="nc" id="L91">    }</span>
+
+    public void printSeven() {
+<span class="nc" id="L94">        out.println(TOP_BORDER);</span>
+<span class="nc" id="L95">        out.println(SIDE_BORDER);</span>
+<span class="nc" id="L96">        out.println(HEAD);</span>
+<span class="nc" id="L97">        out.println(BODY);</span>
+<span class="nc" id="L98">        out.println(LEGS);</span>
+<span class="nc" id="L99">        out.println(EMPTY_SIDE + &quot; ```&quot;);</span>
+<span class="nc" id="L100">        out.println(BASE + &quot;    ______&quot;);</span>
+<span class="nc" id="L101">    }</span>
+
+    public void print(int mistakesCount) {
+<span class="nc bnc" id="L104" title="All 8 branches missed.">        switch (mistakesCount) {</span>
+<span class="nc" id="L105">            case MISTAKE_COUNT_ONE -&gt; printOne();</span>
+<span class="nc" id="L106">            case MISTAKE_COUNT_TWO -&gt; printTwo();</span>
+<span class="nc" id="L107">            case MISTAKE_COUNT_THREE -&gt; printThree();</span>
+<span class="nc" id="L108">            case MISTAKE_COUNT_FOUR -&gt; printFour();</span>
+<span class="nc" id="L109">            case MISTAKE_COUNT_FIVE -&gt; printFive();</span>
+<span class="nc" id="L110">            case MISTAKE_COUNT_SIX -&gt; printSix();</span>
+<span class="nc" id="L111">            case MISTAKE_COUNT_SEVEN -&gt; printSeven();</span>
+            default -&gt; {
+<span class="nc" id="L113">                return;</span>
+            }
+        }
+<span class="nc" id="L116">    }</span>
+
+    public void printWord(List&lt;Integer&gt; indexes) {
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        for (int i = 0; i &lt; this.word.length(); i++) {</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (indexes.contains(i)) {</span>
+<span class="nc" id="L121">                out.print(this.word.charAt(i));</span>
+            } else {
+<span class="nc" id="L123">                out.print(EMPTY_ELEMENT);</span>
+            }
+        }
+<span class="nc" id="L126">        out.println();</span>
+<span class="nc" id="L127">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

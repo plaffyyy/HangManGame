@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>City.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java</a> &gt; <a href="index.source.html" class="el_package">backend.academy.domain</a> &gt; <span class="el_source">City.java</span></div><h1>City.java</h1><pre class="source lang-java linenums">package backend.academy.domain;
+
+import java.util.HashMap;
+import java.util.Map;
+import lombok.Getter;
+
+@Getter
+<span class="nc" id="L8">public non-sealed class City extends Category {</span>
+<span class="nc" id="L9">    private Map&lt;String, String&gt; cities = new HashMap&lt;String, String&gt;() {{</span>
+<span class="nc" id="L10">        put(&quot;Токио&quot;, &quot;Столица Японии&quot;);</span>
+<span class="nc" id="L11">        put(&quot;Париж&quot;, &quot;Столица Франции, известная Эйфелевой башней&quot;);</span>
+<span class="nc" id="L12">        put(&quot;Лондон&quot;, &quot;Столица Великобритании&quot;);</span>
+<span class="nc" id="L13">        put(&quot;Шанхай&quot;, &quot;Крупнейший город Китая&quot;);</span>
+<span class="nc" id="L14">        put(&quot;Москва&quot;, &quot;Столица России&quot;);</span>
+<span class="nc" id="L15">        put(&quot;Мумбаи&quot;, &quot;Крупнейший город Индии&quot;);</span>
+<span class="nc" id="L16">        put(&quot;Сидней&quot;, &quot;Крупнейший город Австралии&quot;);</span>
+<span class="nc" id="L17">        put(&quot;Рим&quot;, &quot;Столица Италии&quot;);</span>
+<span class="nc" id="L18">        put(&quot;Берлин&quot;, &quot;Столица Германии&quot;);</span>
+<span class="nc" id="L19">        put(&quot;Торонто&quot;, &quot;Крупнейший город Канады&quot;);</span>
+<span class="nc" id="L20">        put(&quot;Дубай&quot;, &quot;Город в ОАЭ, известный своей архитектурой&quot;);</span>
+<span class="nc" id="L21">        put(&quot;Пекин&quot;, &quot;Столица Китая&quot;);</span>
+<span class="nc" id="L22">        put(&quot;Сингапур&quot;, &quot;Город-государство в Юго-Восточной Азии&quot;);</span>
+<span class="nc" id="L23">        put(&quot;Мадрид&quot;, &quot;Столица Испании&quot;);</span>
+<span class="nc" id="L24">        put(&quot;Бангкок&quot;, &quot;Столица Таиланда&quot;);</span>
+<span class="nc" id="L25">        put(&quot;Каир&quot;, &quot;Столица Египта&quot;);</span>
+<span class="nc" id="L26">        put(&quot;Амстердам&quot;, &quot;Столица Нидерландов&quot;);</span>
+    }};
+
+    @Override
+    public Map&lt;String, String&gt; getData() {
+<span class="nc" id="L31">        return cities;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L36">        return &quot;города мира&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

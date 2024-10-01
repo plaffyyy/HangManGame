@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GameLogic.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">java</a> &gt; <a href="index.source.html" class="el_package">backend.academy.domain</a> &gt; <span class="el_source">GameLogic.java</span></div><h1>GameLogic.java</h1><pre class="source lang-java linenums">package backend.academy.domain;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter @Getter public final class GameLogic {
+    private static final int MATH_CATEGORY = 1;
+    private static final int MEDICINE_CATEGORY = 2;
+    private static final int CITIES_CATEGORY = 3;
+    private static final int STATES_CATEGORY = 4;
+    private static final int COUNTRIES_CATEGORY = 5;
+    private static final int RANDOM_CATEGORY_INTEGER = 0;
+    private static final String RANDOM_CATEGORY = &quot;0&quot;;
+    private static final int EASY_MISTAKES_LIMIT = 7;
+    private static final int MEDIUM_MISTAKES_LIMIT = 6;
+    private static final int HARD_MISTAKES_LIMIT = 5;
+    private static final String HINT_COMMAND = &quot;подсказка&quot;;
+<span class="nc" id="L29">    private static final SecureRandom RANDOM = new SecureRandom();</span>
+
+    private BufferedReader reader;
+    private PrintStream out;
+<span class="nc" id="L33">    private final int hintsLimit = 1;</span>
+<span class="nc" id="L34">    private final List&lt;Character&gt; alphabet = new ArrayList&lt;&gt;(</span>
+<span class="nc" id="L35">        Arrays.asList('а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с',</span>
+<span class="nc" id="L36">            'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я'));</span>
+    private String word;
+    private String hint;
+    private String level;
+    private String category;
+<span class="nc" id="L41">    private int amountMistakes = EASY_MISTAKES_LIMIT;</span>
+
+<span class="nc" id="L43">    public GameLogic(InputStream in, PrintStream out) {</span>
+<span class="nc" id="L44">        this.reader = new BufferedReader(new InputStreamReader(in, StandardCharsets.UTF_8));</span>
+<span class="nc" id="L45">        this.out = out;</span>
+<span class="nc" id="L46">    }</span>
+
+<span class="nc" id="L48">    public GameLogic() {</span>
+
+<span class="nc" id="L50">    }</span>
+
+    private void chooseCategory() {
+<span class="nc" id="L53">        out.println(MATH_CATEGORY + &quot; - Математика   &quot; + MEDICINE_CATEGORY + &quot; - Медицина   &quot;</span>
+            + CITIES_CATEGORY + &quot; - Города мира   &quot; + STATES_CATEGORY + &quot; - Штаты   &quot;
+            + COUNTRIES_CATEGORY + &quot; - Страны&quot;);
+<span class="nc" id="L56">        out.println(&quot;Напиши соответсвующую цифру либо просто нажми 'Enter' &quot;</span>
+            + &quot;или любое другое число для выбора случайной категории.&quot;);
+<span class="nc" id="L58">    }</span>
+
+    private void firstWords() {
+<span class="nc" id="L61">        out.println(&quot;Здравствуй! Ты зашел в игру 'Виселица', &quot;</span>
+            + &quot;укажи категорию слов, которая нравится больше всего из следующих:&quot;);
+<span class="nc" id="L63">        chooseCategory();</span>
+<span class="nc" id="L64">    }</span>
+
+    private void wrongInputCategory() {
+<span class="nc" id="L67">        out.println(&quot;Введите категорию (число) или нажмите пробел для выбора случайной категории:&quot;);</span>
+<span class="nc" id="L68">        chooseCategory();</span>
+<span class="nc" id="L69">    }</span>
+
+    private void wrongInputLevel() {
+<span class="nc" id="L72">        out.println(&quot;Введите количество допустимых ошибок (число) или &quot;</span>
+            + &quot;нажмите пробел для выбора случайного уровня сложности:&quot;);
+<span class="nc" id="L74">    }</span>
+
+    private void chooseLevel() {
+<span class="nc" id="L77">        out.println(</span>
+            &quot;Теперь выбери уровень сложности из трех(введи соответсвующее &quot;
+                + &quot;количество ошибок), число справа &quot;
+                + &quot;обозначает количество допустимых ошибок&quot;);
+<span class="nc" id="L81">        out.println(&quot;Легкий - &quot; + EASY_MISTAKES_LIMIT + &quot; ошибок   Средний - &quot;</span>
+            + MEDIUM_MISTAKES_LIMIT + &quot; ошибок  Сложный - &quot;
+            + HARD_MISTAKES_LIMIT + &quot; ошибок&quot;);
+<span class="nc" id="L84">        out.println(&quot;Просто нажми 'Enter' для выбора случайного уровня сложности.&quot;);</span>
+<span class="nc" id="L85">    }</span>
+
+    private String getCategoryFromNumber(int number) {
+<span class="nc bnc" id="L88" title="All 6 branches missed.">        return switch (number) {</span>
+<span class="nc" id="L89">            case MATH_CATEGORY -&gt; &quot;Математика&quot;;</span>
+<span class="nc" id="L90">            case MEDICINE_CATEGORY -&gt; &quot;Медицина&quot;;</span>
+<span class="nc" id="L91">            case CITIES_CATEGORY -&gt; &quot;Города мира&quot;;</span>
+<span class="nc" id="L92">            case STATES_CATEGORY -&gt; &quot;Штаты&quot;;</span>
+<span class="nc" id="L93">            case COUNTRIES_CATEGORY -&gt; &quot;Страны&quot;;</span>
+<span class="nc" id="L94">            default -&gt; &quot;&quot;;</span>
+        };
+    }
+
+    public boolean start() throws IOException {
+<span class="nc" id="L99">        firstWords();</span>
+<span class="nc" id="L100">        String categoryString = &quot;&quot;;</span>
+        String categoryNumber;
+<span class="nc" id="L102">        boolean validInput = false; // Флаг для выхода из цикла</span>
+
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        while (!validInput) { // Цикл будет работать, пока ввод не станет валидным</span>
+<span class="nc" id="L105">            categoryNumber = reader.readLine();</span>
+
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (categoryNumber.trim().isEmpty()) {</span>
+<span class="nc" id="L108">                categoryString = &quot;&quot;; // Например, если пробел - выбираем случайную категорию</span>
+<span class="nc" id="L109">                validInput = true; // Ввод корректный, выходим из цикла</span>
+            } else {
+                try {
+<span class="nc" id="L112">                    categoryString = getCategoryFromNumber(Integer.parseInt(categoryNumber));</span>
+<span class="nc" id="L113">                    validInput = true; // Если число корректное, выходим из цикла</span>
+<span class="nc" id="L114">                } catch (NumberFormatException e) {</span>
+<span class="nc" id="L115">                    wrongInputCategory(); // Если ошибка ввода, сообщаем и продолжаем цикл</span>
+<span class="nc" id="L116">                }</span>
+            }
+        }
+<span class="nc" id="L119">        Category selectedCategory = new WordsCategory(categoryString).getCategory();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        while (selectedCategory == null) {</span>
+<span class="nc" id="L121">            wrongInputCategory();</span>
+<span class="nc" id="L122">            categoryString = reader.readLine();</span>
+<span class="nc" id="L123">            selectedCategory = new WordsCategory(categoryString).getCategory();</span>
+        }
+<span class="nc" id="L125">        this.category = selectedCategory.toString();</span>
+<span class="nc" id="L126">        Map.Entry&lt;String, String&gt; wordHint = selectedCategory.getElement();</span>
+<span class="nc" id="L127">        this.word = wordHint.getKey().toLowerCase();</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">        if (this.word.length() &lt;= 1) {</span>
+<span class="nc" id="L129">            return false;</span>
+        }
+<span class="nc" id="L131">        this.hint = wordHint.getValue();</span>
+
+<span class="nc" id="L133">        chooseLevel();</span>
+<span class="nc" id="L134">        boolean flag = false;</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        while (!flag) {</span>
+<span class="nc" id="L136">            this.level = reader.readLine();</span>
+<span class="nc" id="L137">            flag = defineAmountMistakes();</span>
+        }
+<span class="nc" id="L139">        return true;</span>
+    }
+
+    public boolean defineAmountMistakes() {
+<span class="nc bnc" id="L143" title="All 5 branches missed.">        switch (this.level) {</span>
+            case &quot;7&quot; -&gt;
+<span class="nc" id="L145">                this.amountMistakes = EASY_MISTAKES_LIMIT;</span>
+            case &quot;6&quot; -&gt;
+<span class="nc" id="L147">                this.amountMistakes = MEDIUM_MISTAKES_LIMIT;</span>
+            case &quot;5&quot; -&gt;
+<span class="nc" id="L149">                this.amountMistakes = HARD_MISTAKES_LIMIT;</span>
+            case &quot;&quot; -&gt;
+<span class="nc" id="L151">                this.amountMistakes = RANDOM.nextInt(HARD_MISTAKES_LIMIT, EASY_MISTAKES_LIMIT);</span>
+            default -&gt; {
+<span class="nc" id="L153">                wrongInputLevel();</span>
+<span class="nc" id="L154">                return false;</span>
+            }
+        }
+<span class="nc" id="L157">        return true;</span>
+    }
+
+    private void printAlphabet(List&lt;Character&gt; mistakesElements, List&lt;Character&gt; usedElements) {
+<span class="nc bnc" id="L161" title="All 2 branches missed.">        for (Character element : alphabet) {</span>
+<span class="nc bnc" id="L162" title="All 4 branches missed.">            if (mistakesElements.contains(element) || usedElements.contains(element)) {</span>
+<span class="nc" id="L163">                continue;</span>
+            } else {
+<span class="nc" id="L165">                out.print(element + &quot; &quot;);</span>
+            }
+<span class="nc" id="L167">        }</span>
+<span class="nc" id="L168">        out.println();</span>
+<span class="nc" id="L169">    }</span>
+
+    public boolean lenCheck(String element) {
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        return element.length() == 1;</span>
+    }
+
+    public void play() throws IOException {
+<span class="nc" id="L176">        out.println(&quot;В любой момент игры ты можешь получить подсказку(кроме некорректных вводов), &quot;</span>
+            + &quot;просто напиши слово '&quot; + HINT_COMMAND + &quot;', но учти, что данная опция работает только один раз.&quot;);
+<span class="nc" id="L178">        out.println(&quot;Категория: &quot; + this.category + &quot;, Количество попыток: &quot; + this.amountMistakes);</span>
+<span class="nc" id="L179">        int mistakesCount = 0;</span>
+<span class="nc" id="L180">        int hintsCount = 0;</span>
+<span class="nc" id="L181">        GameVisualizator visualizator = new GameVisualizator(out, word);</span>
+
+<span class="nc" id="L183">        List&lt;Integer&gt; guessedIndexes = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L184">        List&lt;Character&gt; mistakesElements = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L185">        List&lt;Character&gt; usedElements = new ArrayList&lt;&gt;(); //store the element, which was used</span>
+
+<span class="nc bnc" id="L187" title="All 4 branches missed.">        while (mistakesCount &lt; this.amountMistakes &amp;&amp; guessedIndexes.size() &lt; this.word.length()) {</span>
+<span class="nc" id="L188">            out.println(&quot;Введи букву из следующих:&quot;);</span>
+
+<span class="nc" id="L190">            printAlphabet(mistakesElements, usedElements);</span>
+
+<span class="nc" id="L192">            visualizator.print(mistakesCount);</span>
+<span class="nc" id="L193">            visualizator.printWord(guessedIndexes);</span>
+
+<span class="nc" id="L195">            boolean flag = false;</span>
+<span class="nc" id="L196">            String stringElement = reader.readLine().toLowerCase();</span>
+<span class="nc bnc" id="L197" title="All 4 branches missed.">            if (hintsCount &lt; hintsLimit &amp;&amp; HINT_COMMAND.equals(stringElement)) {</span>
+<span class="nc" id="L198">                out.println(this.hint);</span>
+<span class="nc" id="L199">                hintsCount++;</span>
+<span class="nc" id="L200">                continue;</span>
+<span class="nc bnc" id="L201" title="All 4 branches missed.">            } else if (hintsCount &gt;= hintsLimit &amp;&amp; HINT_COMMAND.equals(stringElement)) {</span>
+<span class="nc" id="L202">                out.println(&quot;Ты уже пользовался возможностью взять подсказку!&quot;);</span>
+<span class="nc" id="L203">                continue;</span>
+            }
+<span class="nc bnc" id="L205" title="All 2 branches missed.">            while (!alphabet.contains(stringElement.charAt(0))) {</span>
+<span class="nc" id="L206">                out.println(&quot;Введи символ на латинице!&quot;);</span>
+<span class="nc" id="L207">                stringElement = reader.readLine().toLowerCase();</span>
+            }
+<span class="nc bnc" id="L209" title="All 2 branches missed.">            while (!lenCheck(stringElement)) {</span>
+<span class="nc" id="L210">                out.println(&quot;Ты ввел больше одного символа или вообще не ввел, попробуй еще раз.&quot;);</span>
+<span class="nc" id="L211">                stringElement = reader.readLine().toLowerCase();</span>
+            }
+<span class="nc bnc" id="L213" title="All 2 branches missed.">            while (usedElements.contains(stringElement.charAt(0))</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">                || mistakesElements.contains(stringElement.charAt(0))) {</span>
+<span class="nc" id="L215">                out.println(&quot;Ты уже вводил этот символ, введи из списка ниже:&quot;);</span>
+<span class="nc" id="L216">                printAlphabet(mistakesElements, usedElements);</span>
+<span class="nc" id="L217">                stringElement = reader.readLine().toLowerCase();</span>
+            }
+
+<span class="nc" id="L220">            char element = stringElement.toLowerCase().charAt(0);</span>
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            for (int i = 0; i &lt; this.word.length(); i++) {</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">                if (this.word.charAt(i) == element) {</span>
+<span class="nc" id="L223">                    guessedIndexes.add(i);</span>
+<span class="nc" id="L224">                    flag = true;</span>
+                }
+            }
+
+<span class="nc bnc" id="L228" title="All 2 branches missed.">            if (!flag) {</span>
+<span class="nc" id="L229">                mistakesElements.add(element);</span>
+<span class="nc" id="L230">                mistakesCount++;</span>
+            } else {
+<span class="nc" id="L232">                usedElements.add(element);</span>
+            }
+<span class="nc" id="L234">        }</span>
+
+<span class="nc bnc" id="L236" title="All 2 branches missed.">        if (mistakesCount == this.amountMistakes) {</span>
+<span class="nc" id="L237">            visualizator.print(mistakesCount);</span>
+<span class="nc" id="L238">            out.println(&quot;Вы проиграли(&quot;);</span>
+<span class="nc" id="L239">            out.println(&quot;Это было слово: &quot; + this.word);</span>
+        } else {
+<span class="nc" id="L241">            visualizator.printWord(guessedIndexes);</span>
+<span class="nc" id="L242">            out.println(&quot;Поздравляем! Все верно!&quot;);</span>
+        }
+<span class="nc" id="L244">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
